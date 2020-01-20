@@ -15,7 +15,7 @@
 [Visual Paradigm](https://www.visual-paradigm.com)  
 [OkHttp](https://square.github.io/okhttp/)  
 [Github授权登陆](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)  
-
+[flyway](https://flywaydb.org/getstarted/why)  
 ## 脚本  
 ```sql
 create table USER
@@ -28,4 +28,8 @@ create table USER
 	GMT_CREATE BIGINT,
 	GMT_MODIFIED BIGINT
 );
-```
+```  
+
+## 遗留问题  
+H2数据库自增间隔在1和32之间变  
+1.每次通过登录插入用户信息后用数据库工具自增变为32
