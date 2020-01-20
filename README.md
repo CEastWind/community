@@ -15,7 +15,7 @@
 [Visual Paradigm](https://www.visual-paradigm.com)  
 [OkHttp](https://square.github.io/okhttp/)  
 [Github授权登陆](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)  
-[flyway](https://flywaydb.org/getstarted/why)  
+[Flyway](https://flywaydb.org/getstarted/why)  
 ## 脚本  
 ```sql
 create table USER
