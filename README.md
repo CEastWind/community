@@ -7,7 +7,8 @@
 [Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)  
 [SpringBoot2.2.0](https://docs.spring.io/spring-boot/docs/2.2.0.RC1/reference/htmlsingle/)  
 [mybatis-spring-boot](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)  
-[H2 Database](http://www.h2database.com/html/main.html)
+[H2 Database](http://www.h2database.com/html/main.html)  
+[Thyleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#iteration)  
 
 
 ## 工具  
@@ -16,6 +17,7 @@
 [OkHttp](https://square.github.io/okhttp/)  
 [Github授权登陆](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)  
 [Flyway](https://flywaydb.org/getstarted/why)  
+[Lombok](https://projectlombok.org/)  
 ## 脚本  
 ```sql
 create table USER
