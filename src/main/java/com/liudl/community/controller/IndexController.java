@@ -40,6 +40,9 @@ public class IndexController {
 
         List<QuestionDTO> questionDTOList = questionService.list();
         model.addAttribute("questionDTOs", questionDTOList);
+        for (QuestionDTO questionDTO : questionDTOList) {
+            questionDTO.setDescription("一点也不好");
+        }
         //如果没有token这个cookie，则返回没登录的页面
         return "index";
     }
