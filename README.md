@@ -8,7 +8,7 @@
 [SpringBoot2.2.0](https://docs.spring.io/spring-boot/docs/2.2.0.RC1/reference/htmlsingle/)  
 [mybatis-spring-boot](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)  
 [H2 Database](http://www.h2database.com/html/main.html)  
-[Thyleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#iteration)  
+[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#iteration)  
 
 
 ## 工具  

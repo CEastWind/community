@@ -1,5 +1,6 @@
 package com.liudl.community.service;
 
+import com.liudl.community.dto.PaginationDTO;
 import com.liudl.community.dto.QuestionDTO;
 import com.liudl.community.mapper.QuestionMapper;
 import com.liudl.community.mapper.UserMapper;
@@ -24,16 +25,29 @@ public class QuestionService {
     private UserMapper userMapper;
 
 
-    public List<QuestionDTO> list() {
-        List<Question> questions = questionMapper.list();
+    public PaginationDTO list(Integer page, Integer size) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalcount = questionMapper.count();
+        paginationDTO.setPagination(totalcount,page,size);
+
+        //offset代表偏移量
+        Integer offset = size * (paginationDTO.getPage() - 1);
+        List<Question> questions = questionMapper.list(offset, size);
+
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
+            //根据question的Creator查出对应的user
             User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
+            //将question信息传递给questionDTO
             BeanUtils.copyProperties(question,questionDTO);
+            //将user信息传递给questionDTO
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        return questionDTOList;
+        paginationDTO.setQuestionDTOs(questionDTOList);
+
+        return paginationDTO;
     }
+
 }
