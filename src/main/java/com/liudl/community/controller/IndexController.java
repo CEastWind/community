@@ -42,7 +42,7 @@ public class IndexController {
                     break;
                 }
             }
-
+        //分页
         PaginationDTO pagination = questionService.list(page,size);
         model.addAttribute("pagination", pagination);
         //如果没有token这个cookie，则返回没登录的页面

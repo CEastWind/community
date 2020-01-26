@@ -28,6 +28,9 @@ public class QuestionService {
     public PaginationDTO list(Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalcount = questionMapper.count();
+        //没有相关数据
+        if (totalcount == 0) {}
+        //算出导航页码条的信息
         paginationDTO.setPagination(totalcount,page,size);
 
         //offset代表偏移量
@@ -50,4 +53,31 @@ public class QuestionService {
         return paginationDTO;
     }
 
+    public PaginationDTO list(Integer userId, Integer page, Integer size) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalcount = questionMapper.countByUserId(userId);
+        //没有相关数据
+        if (totalcount == 0) {}
+        //算出导航页码条的信息
+        paginationDTO.setPagination(totalcount,page,size);
+
+        //offset代表偏移量
+        Integer offset = size * (paginationDTO.getPage() - 1);
+        List<Question> questions = questionMapper.listByUserId(userId, offset, size);
+
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        for (Question question : questions) {
+            //根据question的Creator查出对应的user
+            User user = userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            //将question信息传递给questionDTO
+            BeanUtils.copyProperties(question,questionDTO);
+            //将user信息传递给questionDTO
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+        }
+        paginationDTO.setQuestionDTOs(questionDTOList);
+
+        return paginationDTO;
+    }
 }
