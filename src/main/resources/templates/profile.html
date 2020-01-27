@@ -23,7 +23,9 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${questionDTO.title}"></h4>
+                    <h4 class="media-heading">
+                        <a th:href="@{'/question/'+${questionDTO.id}}" th:text="${questionDTO.title}"></a>
+                    </h4>
                     <span th:text="${questionDTO.description}"></span> <br>
                     <span class="text-desc"><span th:text="${questionDTO.commentCount}"></span> 个回复 •
                         <span th:text="${questionDTO.viewCount}"></span> 次浏览 • <span th:text="${#dates.format(questionDTO.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
@@ -37,7 +39,7 @@
                         </a>
                     </li>
                     <li th:if="${pagination.showPrevious}">
-                        <a th:href="@{'/profile/'+${section}(page=${pagination.page-1})}" aria-label="Previous">
+                        <a th:href="@{'/profile/'+${section}(page=${pagination.page - 1})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
@@ -45,7 +47,7 @@
                         <a th:href="@{'/profile/'+${section}(page=${page})}" th:text="${page}"></a>
                     </li>
                     <li th:if="${pagination.showNext}">
-                        <a th:href="@{'/profile/'+${section}(page=${pagination.page+1})}" aria-label="Previous">
+                        <a th:href="@{'/profile/'+${section}(page=${pagination.page + 1})}" aria-label="Previous">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>

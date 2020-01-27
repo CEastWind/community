@@ -9,7 +9,7 @@
 [mybatis-spring-boot](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)  
 [H2 Database](http://www.h2database.com/html/main.html)  
 [Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#iteration)  
-
+[Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc)  
 
 ## 工具  
 [Git](https://git-scm.com/download)  

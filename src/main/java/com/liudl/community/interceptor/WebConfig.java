@@ -10,6 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Created by TwistedFate on 2020/1/26 21:11
  */
 @Configuration
+//顺带把css文件也拦截了，汗。。。
+//@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
@@ -18,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns("/**");
-        ///**顺带把css文件也拦截了，汗。。。
+        //顺带把css文件也拦截了，汗。。。
         registry.addInterceptor(sessionInterceptor).addPathPatterns("/**");
     }
 }
