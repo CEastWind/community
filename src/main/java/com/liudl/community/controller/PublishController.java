@@ -78,6 +78,7 @@ public class PublishController {
         question.setDescription(description);
         question.setTag(tag);
         question.setCreator(user.getId());
+        //id为创建时插入页面的question.id,如果没有则为null
         question.setId(id);
         questionService.createOrUpdate(question);
         return "redirect:/";

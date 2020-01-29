@@ -9,9 +9,12 @@
 [mybatis-spring-boot](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)  
 [H2 Database](http://www.h2database.com/html/main.html)  
 [Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#iteration)  
-[Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc)  
+[Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc) 
+[Mybatis](http://mybatis.org/generator/)  
+[SpringBoot ErrorHandling](https://docs.spring.io/spring-boot/docs/2.2.0.RC1/reference/htmlsingle/#boot-features-error-handling)  
 
 ## 工具  
+
 [Git](https://git-scm.com/download)  
 [Visual Paradigm](https://www.visual-paradigm.com)  
 [OkHttp](https://square.github.io/okhttp/)  
@@ -30,6 +33,10 @@ create table USER
 	GMT_CREATE BIGINT,
 	GMT_MODIFIED BIGINT
 );
+```  
+```bash  
+mvn flyway:migrate  
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 ```  
 
 ## 遗留问题  

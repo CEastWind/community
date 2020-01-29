@@ -2,10 +2,15 @@ package com.liudl.community.service;
 
 import com.liudl.community.dto.PaginationDTO;
 import com.liudl.community.dto.QuestionDTO;
+import com.liudl.community.exception.CustomizeErrorCode;
+import com.liudl.community.exception.CustomizeException;
+import com.liudl.community.mapper.QuestionExtMapper;
 import com.liudl.community.mapper.QuestionMapper;
 import com.liudl.community.mapper.UserMapper;
 import com.liudl.community.model.Question;
+import com.liudl.community.model.QuestionExample;
 import com.liudl.community.model.User;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +29,12 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     public PaginationDTO list(Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalcount = questionMapper.count();
+        Integer totalcount =(int) questionMapper.countByExample(new QuestionExample());
         //没有相关数据
         if (totalcount == 0) {}
         //算出导航页码条的信息
@@ -35,12 +42,11 @@ public class QuestionService {
 
         //offset代表偏移量
         Integer offset = size * (paginationDTO.getPage() - 1);
-        List<Question> questions = questionMapper.list(offset, size);
-
+        List<Question> questions = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             //根据question的Creator查出对应的user
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             //将question信息传递给questionDTO
             BeanUtils.copyProperties(question,questionDTO);
@@ -55,7 +61,9 @@ public class QuestionService {
 
     public PaginationDTO list(Integer userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalcount = questionMapper.countByUserId(userId);
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.createCriteria().andCreatorEqualTo(userId);
+        Integer totalcount =(int) questionMapper.countByExample(questionExample);
         //没有相关数据
         if (totalcount == 0) {}
         //算出导航页码条的信息
@@ -63,12 +71,15 @@ public class QuestionService {
 
         //offset代表偏移量
         Integer offset = size * (paginationDTO.getPage() - 1);
-        List<Question> questions = questionMapper.listByUserId(userId, offset, size);
+        QuestionExample questionExample1 = new QuestionExample();
+        questionExample1.createCriteria().andCreatorEqualTo(userId);
+        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample1, new RowBounds(offset, size));
+
 
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             //根据question的Creator查出对应的user
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             //将question信息传递给questionDTO
             BeanUtils.copyProperties(question,questionDTO);
@@ -82,10 +93,14 @@ public class QuestionService {
     }
 
     public QuestionDTO getById(Integer id) {
-        Question question = questionMapper.getById(id);
+        Question question = questionMapper.selectByPrimaryKey(id);
+        //当出现预想到的异常时，用自定义的异常throw出来，错误信息为自定义枚举类
+        if (question == null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
-        User user = userMapper.findById(question.getCreator());
+        User user = userMapper.selectByPrimaryKey(question.getCreator());
         questionDTO.setUser(user);
         return questionDTO;
     }
@@ -95,11 +110,38 @@ public class QuestionService {
             //创建
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.create(question);
+            question.setViewCount(0);
+            question.setCommentCount(0);
+            question.setLikeCount(0);
+            questionMapper.insert(question);
         }else {
             //更新
-            question.setGmtModified(System.currentTimeMillis());
-            questionMapper.update(question);
+            Question updateQuestion = new Question();
+            updateQuestion.setGmtModified(System.currentTimeMillis());
+            updateQuestion.setTitle(question.getTitle());
+            updateQuestion.setDescription(question.getDescription());
+            updateQuestion.setTag(question.getTag());
+            QuestionExample questionExample2 = new QuestionExample();
+            questionExample2.createCriteria().andIdEqualTo(question.getId());
+            int isZeroOrOne = questionMapper.updateByExampleSelective(updateQuestion, questionExample2);
+            //当出现预想到的异常时，用自定义的异常throw出来，错误信息为自定义枚举类
+            if (isZeroOrOne != 1) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
+    }
+
+    public void incView(Integer id) {
+        /**该写法高并发下回出错
+        Question question = questionMapper.selectByPrimaryKey(id);
+        Question updateQuestion = new Question();
+        updateQuestion.setViewCount(question.getViewCount() + 1);
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.createCriteria().andIdEqualTo(id);
+        questionMapper.updateByExampleSelective(updateQuestion, questionExample);**/
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
