@@ -5,4 +5,5 @@ package com.liudl.community.exception;
  */
 public interface ICustomizeErrorCode {
     String getMessage();
+    Integer getCode();
 }

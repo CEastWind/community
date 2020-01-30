@@ -42,7 +42,7 @@ public class QuestionService {
 
         //offset代表偏移量
         Integer offset = size * (paginationDTO.getPage() - 1);
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
+        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             //根据question的Creator查出对应的user
@@ -59,7 +59,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public PaginationDTO list(Integer userId, Integer page, Integer size) {
+    public PaginationDTO list(Long userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andCreatorEqualTo(userId);
@@ -73,7 +73,7 @@ public class QuestionService {
         Integer offset = size * (paginationDTO.getPage() - 1);
         QuestionExample questionExample1 = new QuestionExample();
         questionExample1.createCriteria().andCreatorEqualTo(userId);
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample1, new RowBounds(offset, size));
+        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample1, new RowBounds(offset, size));
 
 
         List<QuestionDTO> questionDTOList = new ArrayList<>();
@@ -92,7 +92,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO getById(Integer id) {
+    public QuestionDTO getById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
         //当出现预想到的异常时，用自定义的异常throw出来，错误信息为自定义枚举类
         if (question == null) {
@@ -131,7 +131,7 @@ public class QuestionService {
         }
     }
 
-    public void incView(Integer id) {
+    public void incView(Long id) {
         /**该写法高并发下回出错
         Question question = questionMapper.selectByPrimaryKey(id);
         Question updateQuestion = new Question();

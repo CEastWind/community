@@ -6,17 +6,19 @@ package com.liudl.community.exception;
 //定义自己的异常处理方式，继承RuntimeException是为了不在throw该异常时需要try catch
 public class CustomizeException extends RuntimeException{
     private String message;
+    private Integer code;
 
     public CustomizeException(ICustomizeErrorCode errorCode) {
         this.message = errorCode.getMessage();
-    }
-
-    public CustomizeException(String message) {
-        this.message = message;
+        this.code = errorCode.getCode();
     }
 
     @Override
     public String getMessage() {
         return message;
+    }
+
+    public Integer getCode() {
+        return code;
     }
 }

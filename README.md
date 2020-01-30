@@ -1,3 +1,4 @@
+
 ## 东林社区
 
 ## 资料  
@@ -21,6 +22,8 @@
 [Github授权登陆](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)  
 [Flyway](https://flywaydb.org/getstarted/why)  
 [Lombok](https://projectlombok.org/)  
+[Live Reload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)  
+[Postman](https://chrome.google.com/webstore/detail/tabbed-postman-rest-clien/coohjcphdfgbiolnekdpbcijmhambjff)  
 ## 脚本  
 ```sql
 create table USER

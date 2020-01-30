@@ -16,6 +16,7 @@ public class IndexController {
     @Autowired
     private QuestionService questionService;
 
+    //地址绑定参数提交
     @GetMapping("/")
     public String index(HttpServletRequest request,
                         Model model,

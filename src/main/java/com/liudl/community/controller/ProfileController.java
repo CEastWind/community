@@ -22,6 +22,7 @@ public class ProfileController {
     @Autowired
     private QuestionService questionService;
 
+    //浏览器地址路径值提交
     @GetMapping("/profile/{action}")
     public String profile(HttpServletRequest request,
                           @PathVariable(name = "action") String action,
