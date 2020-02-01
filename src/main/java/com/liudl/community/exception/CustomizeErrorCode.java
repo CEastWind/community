@@ -12,6 +12,7 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     SYS_ERROR(200,"船体出现不明漏洞！前方危险，建议返航！"),
     TYPE_PARAM_WRONG(2005,"评论类型错误或评论不存在"),
     COMMENT_NOT_FOUND(2006,"评论不存在或已删除"),
+    COMMENT_IS_EMPTY(2007,"输入内容不能为空"),
     ;
 
     private String message;

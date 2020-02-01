@@ -31,6 +31,10 @@ body {
     margin-top: 15px;
 }
 
+.question-title {
+    margin-top: 25px;
+}
+
 .community-menu {
     display: block;
     color: #999;
