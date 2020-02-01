@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by TwistedFate on 2020/1/28 18:49
+ * 该类处理CustomizeExceptionHandler不能处理的错误
  */
 @Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")

@@ -1,30 +1,71 @@
-body{
+body {
     background-color: #efefef;
 }
+
 .main {
     background-color: white;
     margin: 30px;
 }
-.btn-publish{
+
+.btn-publish {
     float: right;
     margin-bottom: 15px;
 }
-.media-object{
+
+.media-object {
     width: 38px;
     height: 38px;
 }
+
+.media-body {
+    padding-top: 8px;
+}
+
 .text-desc {
     font-size: 12px;
     font-weight: normal;
     color: #999;
 }
+
 .profile .section {
     margin-top: 15px;
 }
+
 .community-menu {
+    display: block;
     color: #999;
     font-size: 13px;
+    margin-bottom: 15px;
 }
-.jumbotron{
+
+.jumbotron {
     margin: 50px;
+}
+
+.comment {
+    margin: 10px 0;
+}
+
+.comments {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 5px;
+}
+
+.comment-sp {
+    margin-top: 0;
+}
+
+.menu {
+    color: #999;
+    margin-top: 5px;
+}
+
+.menu .icon {
+    margin-right: 15px;
+    font-size: 15px;
+}
+
+.menu .icon:hover {
+    color: #499ef3;
 }
