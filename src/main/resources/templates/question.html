@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/jquery-3.4.1.min.js" type="application/javascript"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/moment.js" type="application/javascript"></script>
     <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
@@ -27,7 +28,7 @@
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${questionDTO.description}"></div>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <a class="community-menu" th:href="@{'/publish/'+${questionDTO.id}}"
+                <a class="community-menu pull-left" th:href="@{'/publish/'+${questionDTO.id}}"
                    th:if="${session.user != null && session.user.id == questionDTO.creator}">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     编辑
@@ -54,9 +55,36 @@
                             <div th:text="${commentDTO.content}"></div>
                             <div class="menu">
                                 <span class="glyphicon glyphicon-thumbs-up icon"></span>
-                                <span class="glyphicon glyphicon-comment icon"></span>
-                                <span class="pull-right"
-                                      th:text="${#dates.format(commentDTO.gmtCreate,'yyyy-MM-dd')}"></span>
+                                <span class="icon" th:data-id="${commentDTO.id}" onclick="collapseComments(this)">
+                                    <i class="glyphicon glyphicon-comment comment-icon"></i>
+                                    <em class="comment-count" th:text="${commentDTO.commentCount}"></em>
+                                </span>
+                                <span class="pull-right" th:text="${#dates.format(commentDTO.gmtCreate,'yyyy-MM-dd')}"></span>
+                            </div>
+                            <!--二级评论-->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse sub-comments" th:id="${'comment-'+commentDTO.id}" >
+<!--                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comments" th:each="commentDTO : ${commentDTOs}">-->
+<!--                                    <div class="media">-->
+<!--                                        <div class="media-left">-->
+<!--                                            <a href="#">-->
+<!--                                                <img class="media-object img-rounded" th:src="${commentDTO.user.avatarUrl}">-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                        <div class="media-body">-->
+<!--                                            <h5 class="media-heading">-->
+<!--                                                <span th:text="${commentDTO.user.name}"></span>-->
+<!--                                            </h5>-->
+<!--                                            <div th:text="${commentDTO.content}"></div>-->
+<!--                                            <span class="pull-right" th:text="${#dates.format(commentDTO.gmtCreate,'yyyy-MM-dd')}"></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control" placeholder="评论一下......" th:id="${'input-'+commentDTO.id}">
+                                    <button type="button" class="btn btn-success pull-right"
+                                            onclick="comment(this)" th:data-id="${commentDTO.id}">评论
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

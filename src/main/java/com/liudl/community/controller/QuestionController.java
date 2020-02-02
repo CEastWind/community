@@ -2,6 +2,7 @@ package com.liudl.community.controller;
 
 import com.liudl.community.dto.CommentDTO;
 import com.liudl.community.dto.QuestionDTO;
+import com.liudl.community.enums.CommentTypeEnum;
 import com.liudl.community.service.CommentService;
 import com.liudl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class QuestionController {
                            Model model) {
         QuestionDTO questionDTO = questionService.getById(id);
 
-        List<CommentDTO> commentDTOs = commentService.listByQuestionId(id);
+        List<CommentDTO> commentDTOs = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
 
         //累加阅读数
         questionService.incView(id);
