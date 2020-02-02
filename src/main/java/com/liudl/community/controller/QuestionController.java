@@ -3,6 +3,7 @@ package com.liudl.community.controller;
 import com.liudl.community.dto.CommentDTO;
 import com.liudl.community.dto.QuestionDTO;
 import com.liudl.community.enums.CommentTypeEnum;
+import com.liudl.community.model.Question;
 import com.liudl.community.service.CommentService;
 import com.liudl.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,14 @@ public class QuestionController {
     public String question(@PathVariable(name = "id") Long id,
                            Model model) {
         QuestionDTO questionDTO = questionService.getById(id);
-
         List<CommentDTO> commentDTOs = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
+        List<Question> relatedQuestions = questionService.selectRelated(questionDTO);
 
         //累加阅读数
         questionService.incView(id);
         model.addAttribute("questionDTO", questionDTO);
         model.addAttribute("commentDTOs", commentDTOs);
+        model.addAttribute("relatedQuestions", relatedQuestions);
         return "question";
     }
 }

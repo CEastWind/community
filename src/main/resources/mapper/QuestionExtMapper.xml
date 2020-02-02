@@ -23,4 +23,8 @@
         set COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER}
         where ID = #{id}
     </update>
+
+    <select id="selectRelated" parameterType="com.liudl.community.model.Question" resultMap="BaseResultMap">
+        select * from QUESTION where ID != #{id} and tag regexp #{tag}
+    </select>
 </mapper>
