@@ -107,3 +107,26 @@ function collapseComments(e) {
         }
     }
 }
+
+/**
+ * 回写选中标签
+ * @param value
+ */
+function selectTag(e) {
+    var value = e.getAttribute("data-tag");
+    var previou = $("#tag").val().split(",");
+    if (previou.indexOf(value) == -1) {
+        if (previou) {
+            $("#tag").val(previou + ',' + value);
+        }else {
+            $("#tag").val(value);
+        }
+    }
+}
+
+/**
+ * 弹出/关闭tags
+ */
+function showSelectTag() {
+    $("#select-tag").show();
+}
