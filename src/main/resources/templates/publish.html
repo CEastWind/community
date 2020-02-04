@@ -42,9 +42,9 @@
 
                         <!-- Tab panes 2/2写到标签多了不自动换行 -->
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane" th:each="category : ${tags}" th:id="${category.categoryName}" style="word-wrap: break-word">
+                            <div role="tabpanel" class="tab-pane" th:each="category : ${tags}" th:id="${category.categoryName}">
                                 <span class="label label-info" th:each="singleTag : ${category.tags}">
-                                    <span class="glyphicon glyphicon-tags" th:text="${singleTag}" onclick="selectTag(this)"
+                                    <span class="glyphicon glyphicon-tags" th:text="${' ' + singleTag}" onclick="selectTag(this)"
                                           th:data-tag="${singleTag}">
                                     </span>
                                 </span>

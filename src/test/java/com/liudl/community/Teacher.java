@@ -15,6 +15,7 @@ public class Teacher extends Person{
         b = b - 1;
     }
     public static void main(String[] args){
+        System.out.println(" " == " ");
     }
 
 }
