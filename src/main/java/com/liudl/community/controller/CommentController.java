@@ -5,7 +5,6 @@ import com.liudl.community.dto.CommentDTO;
 import com.liudl.community.dto.ResultDTO;
 import com.liudl.community.enums.CommentTypeEnum;
 import com.liudl.community.exception.CustomizeErrorCode;
-import com.liudl.community.mapper.CommentMapper;
 import com.liudl.community.model.Comment;
 import com.liudl.community.model.User;
 import com.liudl.community.service.CommentService;

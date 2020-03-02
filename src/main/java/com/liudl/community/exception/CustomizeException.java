@@ -3,7 +3,10 @@ package com.liudl.community.exception;
 /**
  * Created by TwistedFate on 2020/1/28 17:49
  */
-//定义自己的异常处理方式，继承RuntimeException是为了不在throw该异常时需要try catch
+/**
+ * 继承RuntimeException的自定义异常类，方便在可预见的异常处throw，
+ * 继承RuntimeException是为了不在throw该异常时需要try catch
+ */
 public class CustomizeException extends RuntimeException{
     private String message;
     private Integer code;

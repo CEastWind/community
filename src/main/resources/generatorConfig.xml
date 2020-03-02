@@ -5,7 +5,8 @@
 
 <generatorConfiguration>
     <context id="DB2Tables" targetRuntime="MyBatis3">
-        
+
+        <!--分页插件-->
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
         
         <jdbcConnection driverClass="org.h2.Driver"

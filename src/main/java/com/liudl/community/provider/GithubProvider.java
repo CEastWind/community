@@ -13,6 +13,8 @@ import java.io.IOException;
  */
 @Component
 public class GithubProvider {
+    private String string;
+
     /**
      * 向github发post请求，得到access_token
      * @param accessTokenDTO 请求时需要发送的内容

@@ -2,6 +2,7 @@ package com.liudl.community.service;
 
 import com.liudl.community.dto.PaginationDTO;
 import com.liudl.community.dto.QuestionDTO;
+import com.liudl.community.dto.QuestionQueryDTO;
 import com.liudl.community.exception.CustomizeErrorCode;
 import com.liudl.community.exception.CustomizeException;
 import com.liudl.community.mapper.QuestionExtMapper;
@@ -35,19 +36,34 @@ public class QuestionService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search, Integer page, Integer size) {
+
+        if (StringUtils.isNotBlank(search)) {
+            String[] tags = StringUtils.split(search, " ");
+            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+        }
+
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalcount =(int) questionMapper.countByExample(new QuestionExample());
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalcount = questionExtMapper.countBySearch(questionQueryDTO);
+
         //没有相关数据
-        if (totalcount == 0) {}
+        if (totalcount == 0) {
+            return null;
+        }
         //算出导航页码条的信息
         paginationDTO.setPagination(totalcount,page,size);
 
         //offset代表偏移量
         Integer offset = size * (paginationDTO.getPage() - 1);
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample, new RowBounds(offset, size));
+
+        questionQueryDTO.setPage(offset);
+        questionQueryDTO.setSize(size);
+        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
+        //QuestionExample questionExample = new QuestionExample();
+        //questionExample.setOrderByClause("gmt_create desc");
+        //List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample, new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             //根据question的Creator查出对应的user

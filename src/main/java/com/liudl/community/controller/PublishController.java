@@ -67,8 +67,8 @@ public class PublishController {
             model.addAttribute("error", "问题补充不能为空");
             return "publish";
         }
-        if (StringUtils.isBlank(tag)) {
-            model.addAttribute("error", "标签不能为空");
+        if (StringUtils.isBlank(tag) || tag.contains(" ")) {
+            model.addAttribute("error", "标签不能为空且不能包含空格");
             return "publish";
         }
         String invalid = TagCache.filterInvalid(tag);

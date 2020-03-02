@@ -33,6 +33,8 @@ public class CustomizeErrorController implements ErrorController {
             model.addAttribute("message", "5xx服务冒烟了，请稍后再试");
         }
         return new ModelAndView("error");
+        //和上面效果一样？
+        //return "error";
     }
 
     private HttpStatus getStatus(HttpServletRequest request) {

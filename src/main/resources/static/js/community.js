@@ -31,7 +31,9 @@ function comment2target(targetId, type, content) {
             "type": type
         }),
         success: function (response) {
+            console.log(response);
             if (response.code == 200) {
+                /*这tm这个地方直接刷新重新请求页面了，那这个异步有屁的意义？*/
                 window.location.reload();
             } else {
                 if (response.code == 2003) {
@@ -50,7 +52,7 @@ function comment2target(targetId, type, content) {
 }
 
 /**
- * 展开二级评论
+ * 获取二级评论内容并展开二级评论
  */
 function collapseComments(e) {
     var id = e.getAttribute("data-id");
@@ -116,7 +118,7 @@ function selectTag(e) {
     var value = e.getAttribute("data-tag");
     var previou = $("#tag").val().split(",");
     if (previou.indexOf(value) == -1) {
-        if (previou) {
+        if (previou[0] != "") {
             $("#tag").val(previou + ',' + value);
         }else {
             $("#tag").val(value);

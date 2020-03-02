@@ -1,5 +1,5 @@
 
-## 东林社区
+# 东林社区
 
 ## 资料  
 [Spring](https://spring.io/guides)  
@@ -10,9 +10,11 @@
 [mybatis-spring-boot](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)  
 [H2 Database](http://www.h2database.com/html/main.html)  
 [Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#iteration)  
-[Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc) 
-[Mybatis](http://mybatis.org/generator/)  
+[Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc)  
+[Mybatis Generator](http://mybatis.org/generator/)  
 [SpringBoot ErrorHandling](https://docs.spring.io/spring-boot/docs/2.2.0.RC1/reference/htmlsingle/#boot-features-error-handling)  
+[UFile SDK](https://github.com/ucloud/ufile-sdk-java)  
+[SpringBoot Log](https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/htmlsingle/#boot-features-logging)  
 
 ## 工具  
 
@@ -42,7 +44,11 @@ create table USER
 mvn flyway:migrate  
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 ```  
-
-## 遗留问题  
-H2数据库自增间隔在1和32之间变  
-1.每次通过登录插入用户信息后用数据库工具自增变为32
+## 部署  
+### 依赖  
+- Git  
+- JDK  
+- Maven  
+- MySql  
+## 步骤
+- yum update  

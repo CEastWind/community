@@ -21,10 +21,12 @@ public class IndexController {
     public String index(HttpServletRequest request,
                         Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "5") Integer size) {
+                        @RequestParam(name = "size", defaultValue = "10") Integer size,
+                        @RequestParam(name = "search", required = false) String search) {
         //分页
-        PaginationDTO pagination = questionService.list(page,size);
+        PaginationDTO pagination = questionService.list(search, page, size);
         model.addAttribute("pagination", pagination);
+        model.addAttribute("search", search);
         //如果没有token这个cookie，则返回没登录的页面
         return "index";
     }

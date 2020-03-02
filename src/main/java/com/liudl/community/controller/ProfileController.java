@@ -5,6 +5,8 @@ import com.liudl.community.mapper.UserMapper;
 import com.liudl.community.model.User;
 import com.liudl.community.service.NotificationService;
 import com.liudl.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +51,6 @@ public class ProfileController {
             model.addAttribute("pagination", paginationDTO);
             model.addAttribute("section", "replies");
             model.addAttribute("sectionName", "最新回复");
-
         }
 
         return "profile";
