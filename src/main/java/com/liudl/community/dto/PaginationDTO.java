@@ -30,7 +30,7 @@ public class PaginationDTO<T> {
         if (page < 1) {
             page = 1;
         }
-        if (page > totalPage){
+        if (page > totalPage && totalPage != 0){
             page = totalPage;
         }
         this.page = page;
@@ -52,7 +52,7 @@ public class PaginationDTO<T> {
             showPrevious = true;
         }
         //是否展示下一页
-        if (page == totalPage) {
+        if (page == totalPage || totalPage == 0) {
             showNext = false;
         }else {
             showNext = true;
@@ -64,7 +64,7 @@ public class PaginationDTO<T> {
             showFirstPage = true;
         }
         //是否展示最后一页
-        if (pages.contains(totalPage)) {
+        if (pages.contains(totalPage) || totalPage == 0) {
             showEndPage = false;
         }else {
             showEndPage = true;

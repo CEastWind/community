@@ -50,7 +50,9 @@ public class QuestionService {
 
         //没有相关数据
         if (totalcount == 0) {
-            return null;
+            paginationDTO.setPagination(totalcount, page, size);
+            paginationDTO.setData(new ArrayList<>());
+            return paginationDTO;
         }
         //算出导航页码条的信息
         paginationDTO.setPagination(totalcount,page,size);
