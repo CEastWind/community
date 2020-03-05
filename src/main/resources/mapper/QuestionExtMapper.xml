@@ -31,7 +31,7 @@
     <select id="countBySearch" parameterType="com.liudl.community.dto.QuestionQueryDTO" resultType="java.lang.Integer">
         select count(*) from QUESTION
         <where>
-            <if test="search != null">
+            <if test="search != null and search != ''">
                 and TITLE regexp #{search}
             </if>
         </where>
