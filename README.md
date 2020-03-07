@@ -53,3 +53,14 @@ java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.ja
 - MySql  
 ## 步骤
 - yum update  
+- yum install git  
+- mkdir App  
+- cd App  
+- git clone ...  
+- yum install maven  
+- mvn -v  
+- mvn clean compile package  
+- cp application.properties application-production.properties  
+- mvn clean package  
+- java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar  
+

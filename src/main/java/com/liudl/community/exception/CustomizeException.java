@@ -16,6 +16,13 @@ public class CustomizeException extends RuntimeException{
         this.code = errorCode.getCode();
     }
 
+    /*该构造方法之前用于AuthorizeController
+    * 返回github的错误信息，现在舍弃*/
+    public CustomizeException(Integer code, String message) {
+        this.message = message;
+        this.code = code;
+    }
+
     @Override
     public String getMessage() {
         return message;

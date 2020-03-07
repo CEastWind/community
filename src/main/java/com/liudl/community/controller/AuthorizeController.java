@@ -6,7 +6,6 @@ import com.liudl.community.model.User;
 import com.liudl.community.provider.GithubProvider;
 import com.liudl.community.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
