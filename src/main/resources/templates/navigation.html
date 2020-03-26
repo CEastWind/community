@@ -36,9 +36,16 @@
                             <li><a href="/logout">退出登陆</a></li>
                         </ul>
                     </li>
-                    <li th:unless="${session.user != null}">
+                    <li class="dropdown" th:unless="${session.user != null}">
                         <!--<a href="https://github.com/login/oauth/authorize?client_id=16510a15cdf7de8002be&redirect_url=http://localhost:8887/callback&scope=user&state=1">登录</a>-->
-                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='16510a15cdf7de8002be',redirect_uri=${#httpServletRequest.getRequestURL()+'callback'},scope='user',state=1)}">登录</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            <span th:text="登录"></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{https://github.com/login/oauth/authorize(client_id='16510a15cdf7de8002be',redirect_uri=${#httpServletRequest.getRequestURL()+'callback'},scope='user',state=1)}">Github</a></li>
+                            <li><a href="/goLogin">账号密码</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

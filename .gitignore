@@ -5,6 +5,8 @@ target/
 !**/src/test/**
 logs/
 src/main/resources/backup.txt
+src/main/resources/application.properties
+
 ### STS ###
 .apt_generated
 .classpath

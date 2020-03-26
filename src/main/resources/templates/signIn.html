@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>注册-东林社区</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <link rel="icon" href="/images/logo.png" type="image/x-icon"/>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+<div class="container-fluid" style="background-color: white;
+    padding: 42px;
+    width: 390px;
+    margin-top: 12%;">
+    <form action="/signIn" method="post">
+        <h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span>注册</h3>
+        <input type="text" class="form-control glyphicon-log-in login-input" id="phoneNumber" name="phoneNumber"
+               placeholder="11位手机号">
+        <input type="text" class="form-control glyphicon-log-in login-input" id="name" name="name" placeholder="昵称">
+        <input type="password" class="form-control glyphicon-log-in login-input" id="password" name="password" placeholder="密码">
+        <div class="alert alert-danger" th:text="${error}" th:if="${error != null}"></div>
+        <div class="alert alert-success" th:text="${ok}" th:if="${ok != null}"></div>
+        <input class="btn btn-success" type="submit" value="注册">
+        <a href="/goLogin" style="margin-top: 9px;float: right">去登录</a>
+    </form>
+</div>
+</body>
+</html>
