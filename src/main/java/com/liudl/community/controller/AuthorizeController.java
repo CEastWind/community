@@ -19,6 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 /**
  * Created by TwistedFate on 2020/1/17 14:58
@@ -54,12 +55,15 @@ public class AuthorizeController {
                         @RequestParam(name = "password") String password,
                         Model model,
                         HttpServletResponse response) {
-        if (StringUtils.isBlank(phoneNumber)) {
-            model.addAttribute("error", "手机号不能为空");
+        Pattern p = Pattern.compile("^[1]\\d{10}$");
+        if (StringUtils.isBlank(phoneNumber) || !p.matcher(phoneNumber).matches()) {
+            model.addAttribute("error", "请输入正确手机号");
+            model.addAttribute("phoneNumber", phoneNumber);
             return "login";
         }
-        if (StringUtils.isBlank(password)) {
-            model.addAttribute("error", "密码不能为空");
+        if (StringUtils.isBlank(password) || password.trim().length() < 6) {
+            model.addAttribute("error", "请输入6位以上密码");
+            model.addAttribute("phoneNumber", phoneNumber);
             return "login";
         }
         User user = new User();
@@ -91,16 +95,21 @@ public class AuthorizeController {
                          @RequestParam(name = "password") String password,
                          Model model) {
 
-        if (StringUtils.isBlank(phoneNumber)) {
-            model.addAttribute("error", "手机号不能为空");
+        Pattern p = Pattern.compile("^[1]\\d{10}$");
+        if (StringUtils.isBlank(phoneNumber) || !p.matcher(phoneNumber).matches()) {
+            model.addAttribute("error", "请输入正确手机号");
+            model.addAttribute("phoneNumber", phoneNumber);
             return "signIn";
         }
         if (StringUtils.isBlank(name)) {
             model.addAttribute("error", "昵称不能为空");
+            model.addAttribute("phoneNumber", phoneNumber);
             return "signIn";
         }
-        if (StringUtils.isBlank(password)) {
-            model.addAttribute("error", "密码不能为空");
+        if (StringUtils.isBlank(password) || password.trim().length() < 6) {
+            model.addAttribute("error", "请输入6位以上密码");
+            model.addAttribute("name", name);
+            model.addAttribute("phoneNumber", phoneNumber);
             return "signIn";
         }
 
@@ -112,6 +121,8 @@ public class AuthorizeController {
         if (userService.createForSignIn(user)) {
             model.addAttribute("ok", "注册成功，点击“请登录”进行登录");
         } else {
+            model.addAttribute("name", name);
+            model.addAttribute("phoneNumber", phoneNumber);
             model.addAttribute("error", "该号码已被注册");
         }
         return "signIn";

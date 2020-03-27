@@ -42,6 +42,7 @@ create table USER
 ```  
 ```bash  
 mvn flyway:migrate  
+mvn flyway:migrate -Pproduction  
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate  
 java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar  
 ```  
@@ -63,4 +64,5 @@ java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.ja
 - cp application.properties application-production.properties  
 - mvn clean package  
 - java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar  
+- 
 

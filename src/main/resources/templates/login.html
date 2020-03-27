@@ -11,14 +11,22 @@
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">东林 - 主页</a>
+        </div>
+        <p class="navbar-brand" style="font-style: oblique;float: right;">窗外日光弹指过，席间花影座前移</p>
+    </div>
+</nav>
 <div class="container-fluid" style="background-color: white;
     padding: 42px;
     width: 390px;
     margin-top: 12%;">
     <form action="/login" method="post">
         <h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span>登录</h3>
-        <input type="text" class="form-control glyphicon-log-in login-input" id="phoneNumber" name="phoneNumber"
-               placeholder="11位手机号">
+        <input type="number" class="form-control glyphicon-log-in login-input" id="phoneNumber" name="phoneNumber"
+               placeholder="手机号" th:value="${phoneNumber}">
         <input type="password" class="form-control glyphicon-log-in login-input" id="password" name="password" placeholder="密码">
         <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${error}"
              th:if="${error != null}"></div>
